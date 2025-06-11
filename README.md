@@ -60,7 +60,7 @@ npm run deploy
 - Durchschnittspegelstand
 - Extremwerte
 - Vergleich mit Havelpegel
-- Pegel von Landesumweltamt
+- Pegel von Landesumweltamt -> https://www.pegelonline.wsv.de/webservice/guideRestapi
 - Polderkarte im Hintergrund
 
 ## Visuelle Gestaltung
