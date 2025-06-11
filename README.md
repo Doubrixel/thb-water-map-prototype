@@ -1,5 +1,7 @@
 # thb-water-map-prototype
 
+[![GitHub Pages](https://img.shields.io/badge/View-Prototype-blue)](https://doubrixel.github.io/thb-water-map-prototype/)
+
 Dieses Projekt dient zur Visualisierung von Pegelständen. Diese Pegelstände werden von LoRaWAN-Sensoren in Brandenburg (a.d.H.) erfasst.
 
 ## Customize configuration
