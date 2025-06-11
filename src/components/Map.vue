@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mapHolder">
     <l-map ref="map" v-model:zoom="zoom" :center="[52.414167, 12.554167]" :use-global-leaflet="false">
       <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -29,8 +29,9 @@ export default {
 </script>
 
 <style scoped>
-div {
+.mapHolder {
   height: 100%;
   width: 100%;
+  flex-grow: 0;
 }
 </style>
