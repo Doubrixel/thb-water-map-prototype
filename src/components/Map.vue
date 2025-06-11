@@ -7,18 +7,25 @@
           name="OpenStreetMap"
           attribution='<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       ></l-tile-layer>
+      <l-marker :lat-lng="[52.40955, 12.57923]" :name="'Pegelstand Staarbruch-Havel'">
+        <l-popup :options="{interactive: true}"><h1>custom HTML</h1></l-popup>
+        <l-tooltip>Pegelstand Staarbruch-Havel</l-tooltip>
+      </l-marker>
     </l-map>
   </div>
 </template>
 
 <script>
 import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
+import {LMap, LMarker, LTileLayer, LTooltip, LPopup} from "@vue-leaflet/vue-leaflet";
 
 export default {
   components: {
     LMap,
     LTileLayer,
+    LMarker,
+    LTooltip,
+    LPopup
   },
   data() {
     return {
