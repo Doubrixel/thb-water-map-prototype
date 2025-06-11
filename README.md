@@ -36,10 +36,10 @@ npm run build
 ## Roadmap
 1. Git Repo initialisieren
 2. Beispiel Vue App bauen
-3. Karte von Brandenburg einbinden
-4. Beispielsensor einzeichnen mit Visualisierung (statische Daten)
-5. An https://map.ttn-brb.de Daten anbinden
-6. Deployment einrichten
+3. Deployment einrichten
+4. Karte von Brandenburg einbinden
+5. Beispielsensor einzeichnen mit Visualisierung (statische Daten)
+6. An https://map.ttn-brb.de Daten anbinden
 7. MUSS-Features bauen
 8. KANN-Features bauen
 
