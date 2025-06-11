@@ -24,9 +24,15 @@ npm run dev
 npm run build
 ```
 
+### Publish on gh-pages branch
+
+```sh
+npm run deploy
+```
+
 ## Technologien
 - GitHub - VCS
-- ?Docker - Deployment?
+- gh-pages - Deployment
 - Vite - Serving and Bundling
 - Vue - Frontend Framework
 - Leaflet - Karte
@@ -57,3 +63,6 @@ npm run build
 
 ## Visuelle Gestaltung
 Die visuelle Gestaltung soll sich an den beiden Projekten https://map.ttn-brb.de und https://wasserkarte.badbelzig-klimadaten.de/ orientieren.
+
+## TODO
+Attribution einbauen, dass das Favicon von Freepik ist: https://www.freepik.com/icon/water-drop_12041742 -> vermutlich am besten im Footer
