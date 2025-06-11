@@ -7,10 +7,7 @@
           name="OpenStreetMap"
           attribution='<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       ></l-tile-layer>
-      <l-marker :lat-lng="[52.40955, 12.57923]" :name="'Pegelstand Staarbruch-Havel'">
-        <l-popup :options="{interactive: true}"><h1>custom HTML</h1></l-popup>
-        <l-tooltip>Pegelstand Staarbruch-Havel</l-tooltip>
-      </l-marker>
+      <SondenMarker v-for="(sonde) in sonden" :key="sonde['Sensor-ID']" :sonde="sonde"></sondenMarker>
     </l-map>
   </div>
 </template>
@@ -18,9 +15,15 @@
 <script>
 import "leaflet/dist/leaflet.css";
 import {LMap, LMarker, LTileLayer, LTooltip, LPopup} from "@vue-leaflet/vue-leaflet";
+import LoRaWANSondenTooltip from "@/components/LoRaWANSondenTooltip.vue";
+import SondenMarker from "@/components/SondenMarker.vue";
+import sonden from "@/res/sonden.json"
+
 
 export default {
   components: {
+    SondenMarker,
+    LoRaWANSondenTooltip,
     LMap,
     LTileLayer,
     LMarker,
@@ -30,6 +33,7 @@ export default {
   data() {
     return {
       zoom: 14,
+      sonden
     };
   },
 };
@@ -40,5 +44,8 @@ export default {
   height: 100%;
   width: 100%;
   flex-grow: 0;
+}
+.leaflet-popup-content {
+  width: 400px;
 }
 </style>
