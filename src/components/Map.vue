@@ -15,7 +15,6 @@
 <script>
 import "leaflet/dist/leaflet.css";
 import {LMap, LMarker, LTileLayer, LTooltip, LPopup} from "@vue-leaflet/vue-leaflet";
-import LoRaWANSondenTooltip from "@/components/LoRaWANSondenTooltip.vue";
 import SondenMarker from "@/components/SondenMarker.vue";
 import sonden from "@/res/sonden.json"
 
@@ -23,7 +22,6 @@ import sonden from "@/res/sonden.json"
 export default {
   components: {
     SondenMarker,
-    LoRaWANSondenTooltip,
     LMap,
     LTileLayer,
     LMarker,
