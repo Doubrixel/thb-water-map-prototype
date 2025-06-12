@@ -37,9 +37,15 @@ npm run deploy
 - gh-pages - Deployment
 - Vite - Serving and Bundling
 - Vue - Frontend Framework
+- CoreUI - UI Framework
 - Leaflet - Karte
 - D3 - Datenvisualisierung
 
+## Konfiguration
+Aktuell unter res abgelegt
+sonden.json: Hält Informationen über die LoRaWAN Sonden:
+- sondenId: uuid der Sonde gemäß https://map.ttn-brb.de
+- echtwert: Höhe (in m. ü. NHN), auf der die Sonde angebracht ist. Zieht man davon den Messwert der Sonde ab, kennt man den Wasserstand.
 
 ## Roadmap
 1. Git Repo initialisieren
@@ -67,4 +73,4 @@ npm run deploy
 Die visuelle Gestaltung soll sich an den beiden Projekten https://map.ttn-brb.de und https://wasserkarte.badbelzig-klimadaten.de/ orientieren.
 
 ## TODO
-Attribution einbauen, dass das Favicon von Freepik ist: https://www.freepik.com/icon/water-drop_12041742 -> vermutlich am besten im Footer
+CORS Problem lösen

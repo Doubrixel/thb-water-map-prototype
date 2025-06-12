@@ -15,5 +15,14 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: '/thb-water-map-prototype/'
+  base: '/thb-water-map-prototype/',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://map.ttn-brb.de',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })

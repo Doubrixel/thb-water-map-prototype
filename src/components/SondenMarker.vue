@@ -8,9 +8,9 @@ defineProps({
 </script>
 
 <template>
-  <l-marker :lat-lng="[sonde.GeoDaten.lat, sonde.GeoDaten.lon]" :name="sonde.Bezeichnung">
+  <l-marker :lat-lng="[sonde.geoDaten.lat, sonde.geoDaten.lon]" :name="sonde.bezeichnung">
     <l-popup :options="{maxWidth: 400}"><LoRaWANSondenTooltip :sonde="sonde"/></l-popup>
-    <l-tooltip>{{sonde.Bezeichnung}}</l-tooltip>
+    <l-tooltip>{{sonde.bezeichnung}}</l-tooltip>
   </l-marker>
 </template>
 

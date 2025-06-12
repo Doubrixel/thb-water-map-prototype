@@ -7,7 +7,7 @@
           name="OpenStreetMap"
           attribution='<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       ></l-tile-layer>
-      <SondenMarker v-for="(sonde) in sonden" :key="sonde['Sensor-ID']" :sonde="sonde"></sondenMarker>
+      <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde"></sondenMarker>
     </l-map>
   </div>
 </template>
