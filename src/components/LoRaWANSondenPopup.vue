@@ -2,61 +2,43 @@
 import {CButton} from "@coreui/vue/dist/esm/components/button/index.js";
 import {computed, onMounted, ref} from 'vue'
 import Ganglinie from "@/components/Ganglinie.vue";
+import {fetchDataForPastInterval, fetchDataSince, fetchDataSinceWithTimeWindow, Interval, TimeWindow} from "@/services/sondenService.js";
 
 const props = defineProps({
   sonde: Object
 })
 
-// Generate time range: last 30 days
-const now = new Date()
-const end = now.toISOString().slice(0, 16) + 'Z'
-const startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000)
-const start = startDate.toISOString().slice(0, 16) + 'Z'
-
-// Build URL
-const uuid = props.sonde.sensorId
-//todo https://map.ttn-brb.de antatt /api für prod
-const baseUrl = `/api/api/v0/sensors/${uuid}/series/water_level/data`
-const allDataWeeklyUrl = `${baseUrl}?start=${encodeURIComponent('2020-01-01T11:00Z')}&end=${encodeURIComponent(end)}&window=10080`
-const dailyDataUrl = `${baseUrl}?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}&window=1440`
-
 const weeklyDataRef = ref([])
 const dailyDataRef = ref([])
+const allTimeDataDailyRef = ref([])
 
-
-const cleanData = ({samples}) => {
-  return samples.filter(({value}) => value != null).map(({ts, value}) => ({ts: new Date(ts), value}))
-}
-// Fetch data
 onMounted(async () => {
   try {
-    const response = await fetch(allDataWeeklyUrl)
-    const data = await response.json();
-    weeklyDataRef.value = cleanData(data);
-
-    const dailyResponse = await fetch(dailyDataUrl)
-    const dailyData = await dailyResponse.json();
-    dailyDataRef.value = cleanData(dailyData);
+    weeklyDataRef.value = await fetchDataSinceWithTimeWindow(props.sonde, new Date('2020-01-01'), TimeWindow.WEEK)
+    dailyDataRef.value = await fetchDataForPastInterval(props.sonde, Interval.MONTH)
+    allTimeDataDailyRef.value = await fetchDataSince(props.sonde, new Date('2020-01-01'))
   } catch (err) {
     console.error('Error fetching data:', err)
   }
 })
 
+const weeklyDataWithoutNulls = computed(() => weeklyDataRef.value.filter(({ echtwertInM }) => echtwertInM != null))
+
 const allTimeHigh = computed(() => {
-  return weeklyDataRef.value.reduce((acc, current) => acc?.value < current.value ? acc : current, {value: 99999})
+  if (weeklyDataWithoutNulls.value.length === 0) return null
+  return weeklyDataWithoutNulls.value.reduce((acc, current) => acc.echtwertInM > current.echtwertInM ? acc : current)
 })
 
 const allTimeLow = computed(() => {
-  return weeklyDataRef.value.reduce((acc, current) => acc?.value > current.value ? acc : current, {value: -99999})
+  if (weeklyDataWithoutNulls.value.length === 0) return null
+  return weeklyDataWithoutNulls.value.reduce((acc, current) => acc.echtwertInM < current.echtwertInM ? acc : current)
 })
 
 const lastDataPoint = computed(() => {
-  return dailyDataRef.value.findLast(({value}) => value != null) ?? {value: 99999} //todo: vernünftig handlen, wenn seit mehr als 1 monat keine Daten kamen
+  const allTimeDataDailyWithoutNulls = allTimeDataDailyRef.value.filter(({ echtwertInM }) => echtwertInM != null)
+  if (allTimeDataDailyWithoutNulls.length === 0) return null
+  return allTimeDataDailyWithoutNulls[allTimeDataDailyWithoutNulls.length - 1]
 })
-
-const pegelInMmToMueNHN = (pegelInMm) => {
-  return (props.sonde.echtwert - pegelInMm / 100.0).toFixed(2)
-}
 
 </script>
 
@@ -67,10 +49,12 @@ const pegelInMmToMueNHN = (pegelInMm) => {
       <tr>
         <th/>
         <th>
-          m. ü. NHN
+          Wasserstand + PNP
+          absolut über Null
         </th>
         <th>
-          mm. ü. PNP
+          Wasserstand
+          relativ zum PNP
         </th>
         <th>
           Datum
@@ -78,48 +62,48 @@ const pegelInMmToMueNHN = (pegelInMm) => {
       </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr v-if="lastDataPoint">
           <td>
             Aktuell
           </td>
           <td>
-            {{ pegelInMmToMueNHN(lastDataPoint.value) }}
+            {{ lastDataPoint.echtwertInM }} m. ü. NHN
           </td>
           <td>
-            {{ (sonde.pnp - lastDataPoint.value).toFixed(0) }}
+            {{ lastDataPoint.pnpInCm }} cm
           </td>
           <td>
-            {{lastDataPoint.ts?.toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}
+            {{lastDataPoint.timestamp?.toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}
           </td>
         </tr>
 
-        <tr>
+        <tr v-if="allTimeLow">
           <td>
             Min
           </td>
           <td>
-            {{ pegelInMmToMueNHN(allTimeLow.value) }}
+            {{ allTimeLow.echtwertInM }} m. ü. NHN
           </td>
           <td>
-            {{ (sonde.pnp - allTimeLow.value).toFixed(0) }}
+            {{ allTimeLow.pnpInCm }} cm
           </td>
           <td>
-            {{allTimeLow.ts?.toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}
+            {{allTimeLow.timestamp?.toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}
           </td>
         </tr>
 
-        <tr>
+        <tr v-if="allTimeHigh">
           <td>
             Max
           </td>
           <td>
-            {{ pegelInMmToMueNHN(allTimeHigh.value) }}
+            {{ allTimeHigh.echtwertInM }} m. ü. NHN
           </td>
           <td>
-            {{ (sonde.pnp - allTimeHigh.value).toFixed(0) }}
+            {{ allTimeHigh.pnpInCm }} cm
           </td>
           <td>
-            {{allTimeHigh.ts?.toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}
+            {{allTimeHigh.timestamp?.toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'})}}
           </td>
         </tr>
       </tbody>
