@@ -13,9 +13,9 @@ watch(() => props.datenReihe, (datenReihe) => {
   const x = d3.scaleUtc(d3.extent(datenReihe, d => d.timestamp), [marginLeft, width - marginRight]);
 
   // Declare the y (vertical position) scale.
-  const y = d3.scaleLinear().domain([d3.min(filteredDatenReihe, d => +d.echtwertInM)-1, d3.max(filteredDatenReihe, d => +d.echtwertInM)+1]).range([height - marginBottom, marginTop]);
+  const y = d3.scaleLinear().domain([d3.min(filteredDatenReihe, d => +d.echtwertInM)-0.25, d3.max(filteredDatenReihe, d => +d.echtwertInM)+0.25]).range([height - marginBottom, marginTop]);
 
-  const y2 = d3.scaleLinear().domain([d3.min(filteredDatenReihe, d => +d.pnpInCm)-100, d3.max(filteredDatenReihe, d => +d.pnpInCm)+100]).range([height - marginBottom, marginTop]);
+  const y2 = d3.scaleLinear().domain([d3.min(filteredDatenReihe, d => +d.pnpInCm)-25, d3.max(filteredDatenReihe, d => +d.pnpInCm)+25]).range([height - marginBottom, marginTop]);
 
   // Declare the line generator.
   const line = d3.line()
@@ -137,10 +137,6 @@ watch(() => props.datenReihe, (datenReihe) => {
       .attr("stroke", "green")
       .attr("stroke-dasharray", "5 5")
       .attr("stroke-width", 2);
-
-  console.log(y2.domain())
-  console.log(y2.range())
-  console.log(y.clamp())
 
   const legendX = width - marginRight - 190; // Adjust horizontal position
   const legendY = marginTop + 20; // Adjust vertical position

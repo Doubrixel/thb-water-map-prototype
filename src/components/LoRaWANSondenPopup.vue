@@ -3,6 +3,7 @@ import {CButton} from "@coreui/vue/dist/esm/components/button/index.js";
 import {computed, onMounted, ref} from 'vue'
 import Ganglinie from "@/components/Ganglinie.vue";
 import {fetchDataForPastInterval, fetchDataSince, fetchDataSinceWithTimeWindow, Interval, TimeWindow} from "@/services/sondenService.js";
+import {store} from "@/store.js";
 
 const props = defineProps({
   sonde: Object
@@ -110,7 +111,7 @@ const lastDataPoint = computed(() => {
     </table>
   <Ganglinie :datenReihe="dailyDataRef"/>
   <p/>
-  <CButton color="primary" size="sm" variant="ghost">Weitere Infos</CButton>
+  <CButton color="primary" size="sm" variant="ghost" @click="store.selectOverview()">Weitere Infos</CButton>
 </template>
 
 <style scoped>

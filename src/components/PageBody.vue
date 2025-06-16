@@ -1,25 +1,36 @@
 <script setup>
-import {CSidebar, CSidebarFooter, CSidebarNav, CSidebarToggler} from "@coreui/vue/dist/esm/components/sidebar/index.js";
+import {CSidebar, CSidebarBrand, CSidebarFooter, CSidebarHeader, CSidebarNav, CSidebarToggler} from "@coreui/vue/dist/esm/components/sidebar/index.js";
 import Map from "@/components/Map.vue";
+import SensorOverview from "@/components/SensorOverview.vue";
 import {CNavItem} from "@coreui/vue/dist/esm/components/nav/index.js";
+import {MAP, OVERVIEW, store} from "@/store.js";
+import SensorComparison from "@/components/SensorComparison.vue";
+import TimespanSelector from "@/components/TimespanSelector.vue";
 </script>
 
 <template>
   <div class="page-body">
     <CSidebar>
-      <CSidebarNav>
-        <CNavItem href="#" >
+      <CSidebarHeader class="border-bottom">
+        <CSidebarBrand>THB Wasserkarte Prototyp</CSidebarBrand>
+      </CSidebarHeader>
+      <CSidebarNav class="border-bottom">
+        <CNavItem href="#" @click="store.selectMap()">
           Karte
         </CNavItem>
-        <CNavItem href="#">
-          Sensorübersicht (i.A.)
+        <CNavItem href="#" @click="store.selectOverview()">
+          Übersicht
         </CNavItem>
+        <CNavItem href="#" @click="store.selectComparison()" class="border-bottom">
+          Vergleich
+        </CNavItem>
+        <CNavItem><TimespanSelector/></CNavItem>
       </CSidebarNav>
-      <!--<CSidebarFooter class="border-top">
-        <CSidebarToggler/>
-      </CSidebarFooter>-->
+
     </CSidebar>
-    <Map/>
+    <Map v-if="store.selectedTab === MAP"/>
+    <SensorOverview v-else-if="store.selectedTab === OVERVIEW">Übersicht</SensorOverview>
+    <SensorComparison v-else></SensorComparison>
   </div>
 </template>
 
@@ -32,9 +43,6 @@ import {CNavItem} from "@coreui/vue/dist/esm/components/nav/index.js";
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
-}
-aside {
-  height: 100%;
 }
 .sidebar {
   height: 100%;

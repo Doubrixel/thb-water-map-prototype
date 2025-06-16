@@ -8,9 +8,6 @@ import PageBody from "@/components/PageBody.vue";
 
 <template>
   <main>
-    <CHeader>
-      <CHeaderBrand href="#">THB Wasserkarte Prototyp</CHeaderBrand>
-    </CHeader>
     <PageBody/>
     <CFooter>
       <div>
