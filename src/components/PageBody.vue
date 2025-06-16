@@ -3,7 +3,7 @@ import {CSidebar, CSidebarBrand, CSidebarFooter, CSidebarHeader, CSidebarNav, CS
 import Map from "@/components/Map.vue";
 import SensorOverview from "@/components/SensorOverview.vue";
 import {CNavItem} from "@coreui/vue/dist/esm/components/nav/index.js";
-import {MAP, OVERVIEW, store} from "@/store.js";
+import {COMPARISON, MAP, OVERVIEW, store} from "@/store.js";
 import SensorComparison from "@/components/SensorComparison.vue";
 import TimespanSelector from "@/components/TimespanSelector.vue";
 </script>
@@ -26,11 +26,10 @@ import TimespanSelector from "@/components/TimespanSelector.vue";
         </CNavItem>
         <CNavItem><TimespanSelector/></CNavItem>
       </CSidebarNav>
-
     </CSidebar>
-    <Map v-if="store.selectedTab === MAP"/>
-    <SensorOverview v-else-if="store.selectedTab === OVERVIEW">Übersicht</SensorOverview>
-    <SensorComparison v-else></SensorComparison>
+    <Map v-show="store.selectedTab === MAP"/>
+    <SensorOverview v-show="store.selectedTab === OVERVIEW"></SensorOverview>
+    <SensorComparison v-show="store.selectedTab === COMPARISON"></SensorComparison>
   </div>
 </template>
 
@@ -45,6 +44,6 @@ import TimespanSelector from "@/components/TimespanSelector.vue";
   align-items: stretch;
 }
 .sidebar {
-  height: 100%;
+  height: 100vh;
 }
 </style>
