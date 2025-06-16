@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import {TimeWindow} from "@/services/sondenService.js";
 
 export const MAP = 'map'
 export const OVERVIEW = 'overview'
@@ -17,5 +18,5 @@ export const store = reactive({
     },
     startDate: new Date(new Date().setMonth(new Date().getMonth() - 1)),
     endDate: new Date(),
-    interval: 'Tage'
+    interval: TimeWindow.DAY
 })

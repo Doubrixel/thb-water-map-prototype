@@ -1,8 +1,7 @@
 <script setup>
-import {CButton} from "@coreui/vue/dist/esm/components/button/index.js";
-import {computed, onMounted, ref} from 'vue'
+import {computed, onMounted, ref, watch} from 'vue'
 import Ganglinie from "@/components/Ganglinie.vue";
-import {fetchDataForPastInterval, fetchDataSince, fetchDataSinceWithTimeWindow, Interval, TimeWindow} from "@/services/sondenService.js";
+import {fetchDataForDateRangeWithTimeWindow, fetchDataSince, fetchDataSinceWithTimeWindow, Interval, TimeWindow} from "@/services/sondenService.js";
 import {store} from "@/store.js";
 
 const props = defineProps({
@@ -10,18 +9,39 @@ const props = defineProps({
 })
 
 const weeklyDataRef = ref([])
-const dailyDataRef = ref([])
+const selectedDateRangeDataRef = ref([])
 const allTimeDataDailyRef = ref([])
 
 onMounted(async () => {
   try {
     weeklyDataRef.value = await fetchDataSinceWithTimeWindow(props.sonde, new Date('2020-01-01'), TimeWindow.WEEK)
-    dailyDataRef.value = await fetchDataForPastInterval(props.sonde, Interval.MONTH)
     allTimeDataDailyRef.value = await fetchDataSince(props.sonde, new Date('2020-01-01'))
+    await updateSelectedDateRangeData()
   } catch (err) {
     console.error('Error fetching data:', err)
   }
 })
+
+watch(
+    () => [store.startDate, store.endDate, store.interval],
+    async () => {
+      await updateSelectedDateRangeData()
+    }
+)
+
+const updateSelectedDateRangeData = async () => {
+  try {
+    selectedDateRangeDataRef.value = await fetchDataForDateRangeWithTimeWindow(
+        props.sonde,
+        store.startDate,
+        store.endDate,
+        store.interval
+    )
+  } catch (err) {
+    console.error('Fehler beim Laden der Daten zum ausgewählten Zeitraum:', err)
+  }
+}
+
 
 const weeklyDataWithoutNulls = computed(() => weeklyDataRef.value.filter(({ echtwertInM }) => echtwertInM != null))
 
@@ -109,9 +129,7 @@ const lastDataPoint = computed(() => {
         </tr>
       </tbody>
     </table>
-  <Ganglinie :datenReihe="dailyDataRef"/>
-  <p/>
-  <CButton color="primary" size="sm" variant="ghost" @click="store.selectOverview()">Weitere Infos</CButton>
+  <Ganglinie :datenReihe="selectedDateRangeDataRef"/>
 </template>
 
 <style scoped>

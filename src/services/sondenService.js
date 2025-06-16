@@ -11,8 +11,10 @@ Interval.MONTH = 30 * Interval.DAY
 Interval.YEAR = 365 * Interval.DAY
 
 export const TimeWindow = {}
+TimeWindow.HOUR = PrivateInterval.HOUR / PrivateInterval.MINUTE
 TimeWindow.DAY = Interval.DAY / PrivateInterval.MINUTE
 TimeWindow.WEEK = Interval.WEEK / PrivateInterval.MINUTE
+TimeWindow.MONTH = Interval.MONTH / PrivateInterval.MINUTE
 
 export const fetchDataForPastInterval = async (sonde, interval) => {
     const now = new Date()

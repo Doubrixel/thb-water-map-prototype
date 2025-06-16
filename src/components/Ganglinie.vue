@@ -7,7 +7,7 @@ const props = defineProps({
 
 const svgContainer = ref(null)
 watch(() => props.datenReihe, (datenReihe) => {
-
+  svgContainer.value.innerHTML = ''
   const filteredDatenReihe = datenReihe.filter(({echtwertInM}) => echtwertInM != null)
   if (filteredDatenReihe.length === 0) return
   const x = d3.scaleUtc(d3.extent(datenReihe, d => d.timestamp), [marginLeft, width - marginRight]);
@@ -30,11 +30,16 @@ watch(() => props.datenReihe, (datenReihe) => {
       .attr("viewBox", [0, 0, width, height])
       .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
-  const formatGermanDate = d3.timeFormat("%d.%m.")
+  const formatGermanDate = d3.timeFormat("%d.%m.%y")
   // Add the x-axis.
   svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(d3.axisBottom(x).ticks(width / 120).tickSizeOuter(0).tickFormat(formatGermanDate))
+      .selectAll("text")
+      .attr("transform", "rotate(45)")         // 45 Grad drehen
+      .style("text-anchor", "start")           // Text-Ausrichtung anpassen
+      .attr("dx", "0.5em")                     // horizontaler Abstand
+      .attr("dy", "0.25em")
 
   // Add the y-axis, remove the domain line, add grid lines and a label.
   svg.append("g")
@@ -189,7 +194,7 @@ watch(() => props.datenReihe, (datenReihe) => {
   const height = 500;
   const marginTop = 50;
   const marginRight = 60;
-  const marginBottom = 50;
+  const marginBottom = 110;
   const marginLeft = 80;
 
   // Declare the x (horizontal position) scale.
@@ -199,7 +204,7 @@ watch(() => props.datenReihe, (datenReihe) => {
 
 <template>
   <div ref="svgContainer" v-show="datenReihe.length > 0"></div>
-  <div v-show="datenReihe.length === 0"><br/>Keine Datenpunkte in den letzten 30 Tagen.</div>
+  <div v-show="datenReihe.length === 0"><br/>Keine Datenpunkte im ausgewählten Zeitraum.</div>
 </template>
 
 <style scoped>

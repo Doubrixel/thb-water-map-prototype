@@ -4,9 +4,11 @@ import localeDe from 'air-datepicker/locale/de'
 import "air-datepicker/air-datepicker.css"
 import {onMounted, ref, watch} from "vue";
 import {store} from "@/store.js";
+import {TimeWindow} from "@/services/sondenService.js";
 
 const inputRef = ref(null)
 let dp;
+let selectTimeout;
 
 onMounted(() => {
   dp = new AirDatepicker(inputRef.value, {
@@ -18,10 +20,19 @@ onMounted(() => {
     maxDate: new Date(),
     date: [store.startDate, store.endDate],
     onSelect({ date }) {
-      if (date && date.length === 2) {
-        store.startDate = date[0]
-        store.endDate = date[1]
-      }
+      if (selectTimeout) clearTimeout(selectTimeout);
+      selectTimeout = setTimeout(() => {
+        if (date && date.length === 2) {
+          if (
+              store.startDate.getTime() !== date[0].getTime() ||
+              store.endDate.getTime() !== date[1].getTime()
+          ) {
+            store.startDate = date[0];
+            store.endDate = date[1];
+            console.log("selected");
+          }
+        }
+      }, 100); // 100 ms warten, kann auch angepasst werden
     },
     buttons: [
       {
@@ -88,10 +99,10 @@ watch(() => [store.startDate, store.endDate], ([start, end]) => {
 <template>
   Intervall wählen:
   <select v-model="store.interval">
-    <option>Stunden</option>
-    <option>Tage</option>
-    <option>Wochen</option>
-    <option>Monate</option>
+    <option :value="TimeWindow.HOUR">Stunden</option>
+    <option :value="TimeWindow.DAY">Tage</option>
+    <option :value="TimeWindow.WEEK">Wochen</option>
+    <option :value="TimeWindow.MONTH">Monate</option>
   </select>
   Zeitraum auswählen:
   <input ref="inputRef" type="text" />
