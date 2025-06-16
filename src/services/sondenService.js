@@ -41,7 +41,7 @@ export const fetchDataSinceWithTimeWindow = async (sonde, beginDate, timeWindow)
 
 const buildUrl = (sonde, beginDate, endDate, timeWindow) => {
     const { sensorId } = sonde
-    const prefix = '/api'
+    const prefix = 'https://map.ttn-brb.de'
     const baseUrl = prefix + `/api/v0/sensors/${sensorId}/series/water_level/data`
     const urlParams = {
         start: dateToApiFormat(beginDate),
@@ -59,7 +59,7 @@ const dateToApiFormat = (date) => {
 const processData = (rawData, sonde) => {
     const { samples } = rawData
     const { echtwert, pnp } = sonde //echtwert in m, pnp in mm
-    const calcEchtwert = (valueInMm) => valueInMm != null ? (echtwert - valueInMm / 100.0).toFixed(2) : null
+    const calcEchtwert = (valueInMm) => valueInMm != null ? (echtwert - valueInMm / 1000.0).toFixed(2) : null
     const calcPnp = (valueInMm) => valueInMm != null ? ((pnp - valueInMm)/10).toFixed(0) : null
     return samples.map(({ts, value}) => ({timestamp: new Date(ts), echtwertInM: calcEchtwert(value), pnpInCm: calcPnp(value)}))
 }
