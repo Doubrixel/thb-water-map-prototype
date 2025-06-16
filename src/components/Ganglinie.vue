@@ -9,16 +9,18 @@ const svgContainer = ref(null)
 watch(() => props.datenReihe, (datenReihe) => {
 
   const filteredDatenReihe = datenReihe.filter(({echtwertInM}) => echtwertInM != null)
+  if (filteredDatenReihe.length === 0) return
   const x = d3.scaleUtc(d3.extent(datenReihe, d => d.timestamp), [marginLeft, width - marginRight]);
 
   // Declare the y (vertical position) scale.
-  const y = d3.scaleLinear().domain([0, d3.max(filteredDatenReihe, d => d.echtwertInM)]).range([height - marginBottom, marginTop]);
+  const y = d3.scaleLinear().domain([d3.min(filteredDatenReihe, d => +d.echtwertInM)-1, d3.max(filteredDatenReihe, d => +d.echtwertInM)+1]).range([height - marginBottom, marginTop]);
+
+  const y2 = d3.scaleLinear().domain([d3.min(filteredDatenReihe, d => +d.pnpInCm)-100, d3.max(filteredDatenReihe, d => +d.pnpInCm)+100]).range([height - marginBottom, marginTop]);
 
   // Declare the line generator.
   const line = d3.line()
       .x(d => x(d.timestamp))
       .y(d => y(d.echtwertInM))
-      .defined(d => d.echtwertInM != null)
       .curve(d3.curveMonotoneX)
 
   // Create the SVG container.
@@ -38,10 +40,7 @@ watch(() => props.datenReihe, (datenReihe) => {
   svg.append("g")
       .attr("transform", `translate(${marginLeft},0)`)
       .call(d3.axisLeft(y).ticks(height / 80))
-      .call(g => g.select(".domain").remove())
-      .call(g => g.selectAll(".tick line").clone()
-          .attr("x2", width - marginLeft - marginRight)
-          .attr("stroke-opacity", 0.3))
+      .call(g => g.select(".domain"))
       .call(g => g.append("text")
           .attr("x", -marginLeft)
           .attr("y", 40)
@@ -49,6 +48,18 @@ watch(() => props.datenReihe, (datenReihe) => {
           .attr("text-anchor", "start")
           .style("font-size", "30px")
           .text("m. ü. NHN"));
+
+  svg.append("g")
+      .attr("transform", `translate(${width - marginRight},0)`)
+      .call(d3.axisRight(y2).ticks(height / 80))
+      .call(g => g.select(".domain"))
+      .call(g => g.append("text")
+          .attr("x", marginRight)
+          .attr("y", 40)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "end")
+          .style("font-size", "30px")
+          .text("cm"));
 
   svg.selectAll(".tick text").style("font-size", "30px");
 
@@ -89,6 +100,91 @@ watch(() => props.datenReihe, (datenReihe) => {
         tooltip.style("opacity", 0);
       });
 
+  const minValue = d3.min(filteredDatenReihe, d => +d.echtwertInM);
+
+// Draw the average line
+  svg.append("line")
+      .attr("x1", marginLeft)
+      .attr("x2", width - marginRight)
+      .attr("y1", y(minValue))
+      .attr("y2", y(minValue))
+      .attr("stroke", "blue")
+      .attr("stroke-dasharray", "5 5")
+      .attr("stroke-width", 2);
+
+
+  const maxValue = d3.max(filteredDatenReihe, d => +d.echtwertInM);
+
+// Draw the average line
+  svg.append("line")
+      .attr("x1", marginLeft)
+      .attr("x2", width - marginRight)
+      .attr("y1", y(maxValue))
+      .attr("y2", y(maxValue))
+      .attr("stroke", "red")
+      .attr("stroke-dasharray", "5 5")
+      .attr("stroke-width", 2);
+
+
+  const meanValue = d3.mean(filteredDatenReihe, d => +d.echtwertInM);
+
+// Draw the average line
+  svg.append("line")
+      .attr("x1", marginLeft)
+      .attr("x2", width - marginRight)
+      .attr("y1", y(meanValue))
+      .attr("y2", y(meanValue))
+      .attr("stroke", "green")
+      .attr("stroke-dasharray", "5 5")
+      .attr("stroke-width", 2);
+
+  console.log(y2.domain())
+  console.log(y2.range())
+  console.log(y.clamp())
+
+  const legendX = width - marginRight - 190; // Adjust horizontal position
+  const legendY = marginTop + 20; // Adjust vertical position
+
+  const legend = svg.append("g")
+      .attr("class", "legend")
+      .attr("transform", `translate(${legendX},${legendY})`);
+
+// Background box for better readability
+  legend.append("rect")
+      .attr("width", 180)
+      .attr("height", 90)
+      .attr("fill", "white")
+      .attr("stroke-width", 1)
+      .style("opacity", 0.8);
+
+// Legend items
+  const entries = [
+    { label: "Max", value: maxValue, color: "red" },
+    { label: "Avg", value: meanValue, color: "green" },
+    { label: "Min", value: minValue, color: "blue" }
+  ];
+
+  legend.selectAll("text.label")
+      .data(entries)
+      .join("text")
+      .attr("class", "label")
+      .attr("x", 10)
+      .attr("y", (d, i) => 25 + i * 25)
+      .style("font-size", "25px")
+      .attr("fill", d => d.color)
+      .text(d => `${d.label}:`);
+
+  legend.selectAll("text.value")
+      .data(entries)
+      .join("text")
+      .attr("class", "value")
+      .attr("x", 170)
+      .attr("text-anchor", "end")
+      .attr("y", (d, i) => 25 + i * 25)
+      .style("font-size", "25px")
+      .attr("fill", d => d.color)
+      .text(d => `${d.value.toFixed(2)} m`);
+
    svgContainer.value.appendChild(svg.node())
 })
 
@@ -96,9 +192,9 @@ watch(() => props.datenReihe, (datenReihe) => {
   const width = 928;
   const height = 500;
   const marginTop = 50;
-  const marginRight = 30;
+  const marginRight = 60;
   const marginBottom = 50;
-  const marginLeft = 40;
+  const marginLeft = 80;
 
   // Declare the x (horizontal position) scale.
 
