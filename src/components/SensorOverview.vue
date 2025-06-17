@@ -16,15 +16,17 @@ import {CCard, CCardBody} from "@coreui/vue/dist/esm/components/card/index.js";
 
 <style scoped>
 .SensorOverview {
-  padding: 30px;
+  padding: 10px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  align-items: flex-start;
 }
 .Karte {
-  max-width: 30%;
+  width: 500px;
   margin: 10px;
 }
 </style>

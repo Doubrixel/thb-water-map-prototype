@@ -36,7 +36,7 @@ import TimespanSelector from "@/components/TimespanSelector.vue";
 <style scoped>
 .page-body {
   flex-grow: 0;
-  height: 100%;
+  height: 95vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -44,6 +44,6 @@ import TimespanSelector from "@/components/TimespanSelector.vue";
   align-items: stretch;
 }
 .sidebar {
-  height: 100vh;
+  height: 95vh;
 }
 </style>
