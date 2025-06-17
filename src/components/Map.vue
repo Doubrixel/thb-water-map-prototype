@@ -7,6 +7,11 @@
           name="OpenStreetMap"
           attribution='<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       ></l-tile-layer>
+      <l-geo-json
+          v-if="polderGebiete"
+          :geojson="polderGebiete"
+          :options-style="styleGeoJson"
+      ></l-geo-json>
       <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde"></sondenMarker>
     </l-map>
   </div>
@@ -14,9 +19,10 @@
 
 <script>
 import "leaflet/dist/leaflet.css";
-import {LMap, LMarker, LTileLayer, LTooltip, LPopup} from "@vue-leaflet/vue-leaflet";
+import {LMap, LMarker, LTileLayer, LTooltip, LPopup, LGeoJson} from "@vue-leaflet/vue-leaflet";
 import SondenMarker from "@/components/SondenMarker.vue";
 import sonden from "@/res/sonden.json"
+import polderGebiete from "@/res/polder_4326.json"
 
 
 export default {
@@ -26,14 +32,25 @@ export default {
     LTileLayer,
     LMarker,
     LTooltip,
-    LPopup
+    LPopup,
+    LGeoJson
   },
   data() {
     return {
       zoom: 14,
-      sonden
+      sonden,
+      polderGebiete,
     };
   },
+  methods: {
+    styleGeoJson() {
+      return {
+        color: "blue",
+        weight: 1,
+        fillOpacity: 0.1
+      };
+    }
+  }
 };
 </script>
 
