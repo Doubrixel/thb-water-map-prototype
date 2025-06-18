@@ -1,6 +1,6 @@
 <script setup>
 import sonden from "@/res/sonden.json"
-import LoRaWANSondenPopup from "@/components/LoRaWANSondenPopup.vue";
+import LoRaWANSondenPopup from "@/components/pageBody/map/sondenMarker/LoRaWANSondenPopup.vue";
 import {CCard, CCardBody} from "@coreui/vue/dist/esm/components/card/index.js";
 </script>
 

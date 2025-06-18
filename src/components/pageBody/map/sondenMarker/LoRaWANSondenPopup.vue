@@ -1,6 +1,6 @@
 <script setup>
 import {computed, onMounted, ref, watch} from 'vue'
-import Ganglinie from "@/components/Ganglinie.vue";
+import Ganglinie from "@/components/pageBody/map/sondenMarker/sondenPopup/Ganglinie.vue";
 import {fetchDataForDateRangeWithTimeWindow, fetchDataSince, fetchDataSinceWithTimeWindow, Interval, TimeWindow} from "@/services/sondenService.js";
 import {store} from "@/store.js";
 

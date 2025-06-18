@@ -1,6 +1,6 @@
 <script setup>
 
-import {store} from "../store.js";
+import {store} from "../../store.js";
 </script>
 
 <template>

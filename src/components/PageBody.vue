@@ -1,11 +1,11 @@
 <script setup>
 import {CSidebar, CSidebarBrand, CSidebarFooter, CSidebarHeader, CSidebarNav, CSidebarToggler} from "@coreui/vue/dist/esm/components/sidebar/index.js";
-import Map from "@/components/Map.vue";
-import SensorOverview from "@/components/SensorOverview.vue";
+import Map from "@/components/pageBody/Map.vue";
+import SensorOverview from "@/components/pageBody/SensorOverview.vue";
 import {CNavItem} from "@coreui/vue/dist/esm/components/nav/index.js";
 import {COMPARISON, MAP, OVERVIEW, store} from "@/store.js";
-import SensorComparison from "@/components/SensorComparison.vue";
-import TimespanSelector from "@/components/TimespanSelector.vue";
+import SensorComparison from "@/components/pageBody/SensorComparison.vue";
+import TimespanSelector from "@/components/pageBody/TimespanSelector.vue";
 </script>
 
 <template>

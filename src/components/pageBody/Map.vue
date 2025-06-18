@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import L from "leaflet";
+import {control, DomUtil} from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {LMap, LMarker, LTileLayer, LTooltip, LPopup, LGeoJson} from "@vue-leaflet/vue-leaflet";
-import SondenMarker from "@/components/SondenMarker.vue";
+import SondenMarker from "@/components/pageBody/map/SondenMarker.vue";
 import sonden from "@/res/sonden.json"
 import polderGebiete from "@/res/polder_4326.json"
 
@@ -52,9 +52,9 @@ export default {
       };
     },
     addLegend() {
-      const legend = L.control({ position: "bottomright" });
+      const legend = control({ position: "bottomright" });
       legend.onAdd = function () {
-        const div = L.DomUtil.create("div", "info legend");
+        const div = DomUtil.create("div", "info legend");
         div.style.background = "white";       // weißer Hintergrund hinter allem
         div.style.padding = "6px 8px";        // etwas Padding für Abstand
         div.style.borderRadius = "4px";       // leichte Rundung für schöneres Aussehen

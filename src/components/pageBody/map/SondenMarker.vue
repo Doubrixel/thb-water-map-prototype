@@ -1,5 +1,5 @@
 <script setup>
-import LoRaWANSondenPopup from "@/components/LoRaWANSondenPopup.vue";
+import LoRaWANSondenPopup from "@/components/pageBody/map/sondenMarker/LoRaWANSondenPopup.vue";
 import {LMarker, LPopup, LTooltip} from "@vue-leaflet/vue-leaflet";
 
 defineProps({
