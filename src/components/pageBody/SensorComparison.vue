@@ -53,8 +53,9 @@ const allDataRows = computed(() => [...lorawanDataRows.value, ...pegelDataRows.v
 const selectableDataRows = computed(() => allDataRows.value.filter(({dataRow}) => dataRow.length > 0))
 
 watch(selectableDataRows, (newSelectableRows) => {
-  selectedDataRows.value = selectedDataRows.value.filter(selected =>
-      newSelectableRows.includes(selected)
+  const prevSelectedNames = selectedDataRows.value.map(row => row.name)
+  selectedDataRows.value = selectableDataRows.value.filter(({ name }) =>
+      prevSelectedNames.includes(name)
   )
 })
 
