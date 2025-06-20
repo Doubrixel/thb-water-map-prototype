@@ -29,7 +29,6 @@ onMounted(() => {
           ) {
             store.startDate = date[0];
             store.endDate = date[1];
-            console.log("selected");
           }
         }
       }, 100); // 100 ms warten, kann auch angepasst werden
