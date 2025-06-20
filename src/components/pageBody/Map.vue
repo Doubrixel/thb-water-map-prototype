@@ -13,6 +13,7 @@
           :options-style="styleGeoJson"
       ></l-geo-json>
       <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde"></sondenMarker>
+      <PegelOnlineMarker v-for="(pegel) in pegelOnline" :key="pegel.uuid" :pegel="pegel"></PegelOnlineMarker>
     </l-map>
   </div>
 </template>
@@ -24,11 +25,14 @@ import {LMap, LMarker, LTileLayer, LTooltip, LPopup, LGeoJson} from "@vue-leafle
 import SondenMarker from "@/components/pageBody/map/SondenMarker.vue";
 import sonden from "@/res/sonden.json"
 import polderGebiete from "@/res/polder_4326.json"
+import pegelOnline from "@/res/pegelOnline.json"
+import PegelOnlineMarker from "@/components/pageBody/map/PegelOnlineMarker.vue";
 
 
 export default {
   components: {
     SondenMarker,
+    PegelOnlineMarker,
     LMap,
     LTileLayer,
     LMarker,
@@ -41,6 +45,7 @@ export default {
       zoom: 14,
       sonden,
       polderGebiete,
+      pegelOnline
     };
   },
   methods: {

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "BRANDENBURG OP",
+    "uuid": "16d180c2-63aa-486b-8966-81a6041360bc",
+    "munhn": 27.11,
+    "geoDaten": {
+      "lat": 52.420874686459335,
+      "lon": 12.580814114983538
+    }
+  },
+  {
+    "name": "KETZIN",
+    "uuid": "d2d025a2-e691-4986-b9c4-923e7f1a47c3",
+    "munhn": 28.39,
+    "geoDaten": {
+      "lat": 52.46315528857149,
+      "lon": 12.856782146218224
+    }
+  },
+  {
+    "name": "ALBERTSHEIM",
+    "uuid": "3af7d65c-c732-49e9-be05-fe3b5f88657c",
+    "munhn": 24.50,
+    "geoDaten": {
+      "lat": 52.65594738502414,
+      "lon": 12.333708647747075
+    }
+  },
+  {
+    "name": "BRANDENBURG UP",
+    "uuid": "f8806fa4-cc2c-46e8-9b87-6231da0e3ddd",
+    "munhn": 27.11,
+    "geoDaten": {
+      "lat": 52.42366487756139,
+      "lon": 12.568840897802437
+    }
+  }
+]
