@@ -2,16 +2,20 @@
 
 import {store} from "@/store.js";
 import sonden from "@/res/sonden.json"
+import pegelOnline from "@/res/pegelOnline.json"
 import {fetchDataForDateRangeWithTimeWindow} from "@/services/sondenService.js";
+import {fetchDataForDateRangeWithTimeWindow as pegelFetch} from "@/services/pegelOnlineService.js";
 import {computed, ref, watch, watchEffect} from "vue";
 import DataComparisonChart from "@/components/pageBody/sensorComparison/DataComparisonChart.vue";
 
 const DataRowTypes = {
-  LORAWAN_SONDE: 'lorawan-sonde'
+  LORAWAN_SONDE: 'lorawan-sonde',
+  PEGEL_ONLINE: 'pegelonline'
 }
 
 const lorawanDataRows = ref([])
 const selectedDataRows = ref([])
+const pegelDataRows = ref([])
 
 watchEffect(async () => {
   lorawanDataRows.value = await Promise.all(
@@ -27,11 +31,24 @@ watchEffect(async () => {
         ),
       }))
   )
+  pegelDataRows.value = await Promise.all(
+      pegelOnline.map(async (pegel) => ({
+        name: pegel.name,
+        definition: pegel,
+        type: DataRowTypes.PEGEL_ONLINE,
+        dataRow: await pegelFetch(
+            pegel,
+            store.startDate,
+            store.endDate,
+            store.interval
+        ),
+      }))
+  )
 })
 
 
 
-const allDataRows = computed(() => [...lorawanDataRows.value])
+const allDataRows = computed(() => [...lorawanDataRows.value, ...pegelDataRows.value])
 
 const selectableDataRows = computed(() => allDataRows.value.filter(({dataRow}) => dataRow.length > 0))
 

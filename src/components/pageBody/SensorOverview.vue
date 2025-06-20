@@ -1,7 +1,9 @@
 <script setup>
 import sonden from "@/res/sonden.json"
+import pegelOnline from "@/res/pegelOnline.json"
 import LoRaWANSondenPopup from "@/components/pageBody/map/sondenMarker/LoRaWANSondenPopup.vue";
 import {CCard, CCardBody} from "@coreui/vue/dist/esm/components/card/index.js";
+import PegelPopup from "@/components/pageBody/map/pegelOnlineMarker/PegelPopup.vue";
 </script>
 
 <template>
@@ -9,6 +11,11 @@ import {CCard, CCardBody} from "@coreui/vue/dist/esm/components/card/index.js";
     <CCard class="Karte" v-for="(sonde) in sonden" :key="sonde.sensorId">
       <CCardBody>
         <LoRaWANSondenPopup  :sonde="sonde"/>
+      </CCardBody>
+    </CCard>
+    <CCard class="Karte" v-for="(pegel) in pegelOnline" :key="pegel.uuid">
+      <CCardBody>
+        <PegelPopup  :pegel="pegel"/>
       </CCardBody>
     </CCard>
   </div>
