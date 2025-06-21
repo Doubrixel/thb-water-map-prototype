@@ -33,44 +33,55 @@ npm run deploy
 ```
 
 ## Technologien
-- GitHub - VCS
-- gh-pages - Deployment
-- Vite - Serving and Bundling
-- Vue - Frontend Framework
-- CoreUI - UI Framework
-- Leaflet - Karte
-- D3 - Datenvisualisierung
+- GitHub - VCS (https://docs.github.com/de)
+- gh-pages - Deployment (https://www.npmjs.com/package/gh-pages)
+- Vite - Serving and Bundling (https://vite.dev/guide/)
+- Vue - Frontend Framework (https://vuejs.org/)
+- CoreUI - UI Framework (https://coreui.io/vue/)
+- Leaflet - Karte (https://leafletjs.com/index.html / https://github.com/vue-leaflet/vue-leaflet)
+- D3 - Datenvisualisierung (https://d3js.org/getting-started)
+- AIR Datepicker - Datums-/Zeitraumauswahl (https://air-datepicker.com/)
+
+## APIs
+https://pegelonline.wsv.de (Pegelstände Havel)
+https://archive-api.open-meteo.com (Niederschlagsdaten)
+https://map.ttn-brb.de (LoRaWAN Sensordaten)
+
 
 ## Konfiguration
 Aktuell unter res abgelegt
 sonden.json: Hält Informationen über die LoRaWAN Sonden:
 - sondenId: uuid der Sonde gemäß https://map.ttn-brb.de
 - echtwert: Höhe (in m. ü. NHN), auf der die Sonde angebracht ist. Zieht man davon den Messwert der Sonde ab, kennt man den Wasserstand.
+- pnp: Höhe in mm auf welcher der Sensor an der Messlatte befestigt ist. Zieht man davon den Messwert der Sonde ab, kennt man den Pegel relativ zu PNP
+
+pegelOnline.json: Hält Informationen zu Messstellen die den Wasserstand der Havel bereitstellen
+- uuid: uuid gemäß https://www.pegelonline.wsv.de/
+- munhn: PNP der Messlatte in m. ü. NHN
 
 ## Roadmap
-1. Git Repo initialisieren
-2. Beispiel Vue App bauen
-3. Deployment einrichten
-4. Karte von Brandenburg einbinden
-5. Beispielsensor einzeichnen mit Visualisierung (statische Daten)
-6. An https://map.ttn-brb.de Daten anbinden
-7. MUSS-Features bauen
-8. KANN-Features bauen
+1. [x] Git Repo initialisieren
+2. [x] Beispiel Vue App bauen
+3. [x] Deployment einrichten
+4. [x] Karte von Brandenburg einbinden
+5. [x] Beispielsensor einzeichnen mit Visualisierung (statische Daten)
+6. [x] An https://map.ttn-brb.de Daten anbinden
+7. [x] MUSS-Features bauen
+8. [x] KANN-Features bauen
 
 ### MUSS Features
-- Daten der 5 LoRaWAN Sonden auf einen Blick sehen
-- Wasserstand als absolute Angabe
-- Verschiedene Zeiträume einsehbar machen
+- [x] Daten der 5 LoRaWAN Sonden auf einen Blick sehen
+- [x] Wasserstand als absolute Angabe
+- [x] Verschiedene Zeiträume einsehbar machen
 
 ### KANN Features
-- Durchschnittspegelstand
-- Extremwerte
-- Vergleich mit Havelpegel
-- Pegel von Landesumweltamt -> https://www.pegelonline.wsv.de/webservice/guideRestapi
-- Polderkarte im Hintergrund
+- [x] Durchschnittspegelstand
+- [x] Extremwerte
+- [x] Vergleich mit Havelpegel
+- [x] Pegel von Landesumweltamt -> https://www.pegelonline.wsv.de/webservice/guideRestapi
+- [x] Polderkarte im Hintergrund
+- [x] Niederschlagswerte
 
 ## Visuelle Gestaltung
 Die visuelle Gestaltung soll sich an den beiden Projekten https://map.ttn-brb.de und https://wasserkarte.badbelzig-klimadaten.de/ orientieren.
 
-## TODO
-CORS Problem lösen
