@@ -7,6 +7,7 @@ import {fetchDataForDateRangeWithTimeWindow} from "@/services/sondenService.js";
 import {fetchDataForDateRangeWithTimeWindow as pegelFetch} from "@/services/pegelOnlineService.js";
 import {computed, ref, watch, watchEffect} from "vue";
 import DataComparisonChart from "@/components/pageBody/sensorComparison/DataComparisonChart.vue";
+import {fetchData} from "@/services/precipationService.js";
 
 const DataRowTypes = {
   LORAWAN_SONDE: 'lorawan-sonde',
@@ -16,6 +17,7 @@ const DataRowTypes = {
 const lorawanDataRows = ref([])
 const selectedDataRows = ref([])
 const pegelDataRows = ref([])
+const precipationData = ref([])
 
 watchEffect(async () => {
   lorawanDataRows.value = await Promise.all(
@@ -44,6 +46,7 @@ watchEffect(async () => {
         ),
       }))
   )
+  precipationData.value = await fetchData(store.startDate, store.endDate, store.interval)
 })
 
 
@@ -75,7 +78,7 @@ watch(selectableDataRows, () => {
         {{ selectableDataRow.name }}
       </label>
     </div>
-    <DataComparisonChart :dataRows="selectedDataRows"/>
+    <DataComparisonChart :dataRows="selectedDataRows" :precipationData="precipationData" />
   </div>
 </template>
 
