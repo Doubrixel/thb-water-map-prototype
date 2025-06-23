@@ -22,6 +22,20 @@ onMounted(async () => {
   }
 })
 
+const daysSinceLastValidDataPoint = computed(() => {
+  const reversed = [...allTimeDataDailyRef.value].reverse()
+  const lastValid = reversed.find(d => d.echtwertInM != null)
+
+  if (!lastValid || !lastValid.timestamp) return Infinity
+
+  const lastDate = new Date(lastValid.timestamp)
+  if (isNaN(lastDate.getTime())) return Infinity
+
+  const now = new Date()
+  const msPerDay = 1000 * 60 * 60 * 24
+  return Math.floor((now.getTime() - lastDate.getTime()) / msPerDay)
+})
+
 watch(
     () => [store.startDate, store.endDate, store.interval],
     async () => {
@@ -64,7 +78,7 @@ const lastDataPoint = computed(() => {
 </script>
 
 <template>
-  <h6>{{sonde.bezeichnung}}</h6>
+  <h6>{{sonde.bezeichnung}} {{daysSinceLastValidDataPoint > 1 ? "🔴" : "🟢"}}</h6>
     <table>
       <thead>
       <tr>

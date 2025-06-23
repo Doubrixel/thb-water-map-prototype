@@ -1,6 +1,6 @@
 <template>
   <div class="mapHolder">
-    <l-map ref="map" v-model:zoom="zoom" :center="[52.41604, 12.60930]" :use-global-leaflet="false" @ready="onMapReady">
+    <l-map ref="map" v-model:zoom="zoom" :center="[52.41604, 12.60930]" :use-global-leaflet="false" @ready="onMapReady" :options="mapOptions">
       <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           layer-type="base"
@@ -11,6 +11,7 @@
           v-if="polderGebiete"
           :geojson="polderGebiete"
           :options-style="styleGeoJson"
+          :options="{ interactive: false }"
       ></l-geo-json>
       <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde"></sondenMarker>
       <PegelOnlineMarker v-for="(pegel) in pegelOnline" :key="pegel.uuid" :pegel="pegel"></PegelOnlineMarker>
@@ -45,7 +46,13 @@ export default {
       zoom: 14,
       sonden,
       polderGebiete,
-      pegelOnline
+      pegelOnline,
+      mapOptions: {
+        zoomAnimation: true,
+        zoomAnimationThreshold: 4, // optional: sets when animation switches to instant
+        wheelPxPerZoomLevel: 80, // smaller = faster zoom (default: 60)
+        zoomSnap: 0.25,            // allows smoother steps (default: 1)
+      }
     };
   },
   methods: {

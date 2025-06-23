@@ -1,7 +1,7 @@
 [
   {
     "sensorId": "54f0fbe1-f280-4fcc-9f31-aba99bc5f2a8",
-    "bezeichnung": "Pegelstand Staarbruch-Havel",
+    "bezeichnung": "Staarbruch-Havel",
     "geoDaten": {
       "lat": 52.40955,
       "lon": 12.57923
@@ -11,7 +11,7 @@
   },
   {
     "sensorId": "7a48d0c7-e476-4988-bd97-e6f67afbfffc",
-    "bezeichnung": "Pegelstand Staarbruch-Polder",
+    "bezeichnung": "Staarbruch-Polder",
     "geoDaten": {
       "lat": 52.40949,
       "lon": 12.57936
@@ -21,7 +21,7 @@
   },
   {
     "sensorId": "12ef6f66-8e58-44eb-8103-f543888e8cf7",
-    "bezeichnung": "Pegelstand Jakobsgraben UP",
+    "bezeichnung": "Jakobsgraben UP",
     "geoDaten": {
       "lat": 52.40244,
       "lon": 12.57175
@@ -31,7 +31,7 @@
   },
   {
     "sensorId": "33049a20-cc0a-4730-992e-9f19a48636c0",
-    "bezeichnung": "Pegelstand Stau Neujahrsgraben OP",
+    "bezeichnung": "Stau Neujahrsgraben OP",
     "geoDaten": {
       "lat": 52.40249,
       "lon": 12.58917
@@ -41,7 +41,7 @@
   },
   {
     "sensorId": "075b9e51-51e7-4764-817d-889a4624aaaf",
-    "bezeichnung": "Pegelstand Gollwitz",
+    "bezeichnung": "Gollwitz",
     "geoDaten": {
       "lat": 52.42964,
       "lon": 12.64685
