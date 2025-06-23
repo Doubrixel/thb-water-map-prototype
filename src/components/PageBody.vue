@@ -15,13 +15,13 @@ import TimespanSelector from "@/components/pageBody/TimespanSelector.vue";
         <CSidebarBrand>THB Wasserkarte Prototyp</CSidebarBrand>
       </CSidebarHeader>
       <CSidebarNav class="border-bottom">
-        <CNavItem href="#" @click="store.selectMap()">
+        <CNavItem href="#" @click="store.selectMap()" :class="{ selected: store.selectedTab === MAP }">
           Karte
         </CNavItem>
-        <CNavItem href="#" @click="store.selectOverview()">
+        <CNavItem href="#" @click="store.selectOverview()" :class="{ selected: store.selectedTab === OVERVIEW }">
           Übersicht
         </CNavItem>
-        <CNavItem href="#" @click="store.selectComparison()" class="border-bottom">
+        <CNavItem href="#" @click="store.selectComparison()" class="border-bottom" :class="{ selected: store.selectedTab === COMPARISON }">
           Vergleich
         </CNavItem>
         <CNavItem><TimespanSelector/></CNavItem>
@@ -45,5 +45,8 @@ import TimespanSelector from "@/components/pageBody/TimespanSelector.vue";
 }
 .sidebar {
   height: 95vh;
+}
+.selected {
+  background-color: #e0f3ff; /* light blue highlight example */
 }
 </style>

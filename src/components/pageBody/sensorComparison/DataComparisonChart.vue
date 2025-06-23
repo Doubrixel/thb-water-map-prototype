@@ -111,10 +111,12 @@ watch(() => props.precipationData, renderChart, { deep: true })
 </script>
 
 <template>
-  <div ref="svgContainer" v-show="dataRows.length > 0"></div>
+  <div class="ComparisonChartContainer" ref="svgContainer" v-show="dataRows.length > 0"></div>
   <div v-show="dataRows.length === 0"><br/>Keine Datenreihen ausgewählt</div>
 </template>
 
 <style scoped>
-
+.ComparisonChartContainer {
+  width: 100%;
+}
 </style>
