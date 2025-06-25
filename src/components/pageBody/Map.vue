@@ -13,8 +13,8 @@
           :options-style="styleGeoJson"
           :options="{ interactive: false }"
       ></l-geo-json>
-      <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde"></sondenMarker>
-      <PegelOnlineMarker v-for="(pegel) in pegelOnline" :key="pegel.uuid" :pegel="pegel"></PegelOnlineMarker>
+      <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde" :highlight="isHighlighted(sonde.bezeichnung)"></sondenMarker>
+      <PegelOnlineMarker v-for="(pegel) in pegelOnline" :key="pegel.uuid" :pegel="pegel" :highlight="isHighlighted(pegel.name)"></PegelOnlineMarker>
     </l-map>
   </div>
 </template>
@@ -28,6 +28,7 @@ import sonden from "@/res/sonden.json"
 import polderGebiete from "@/res/polder_4326.json"
 import pegelOnline from "@/res/pegelOnline.json"
 import PegelOnlineMarker from "@/components/pageBody/map/PegelOnlineMarker.vue";
+import {store} from "@/store.js";
 
 
 export default {
@@ -62,6 +63,9 @@ export default {
         weight: 1,
         fillOpacity: 0.1
       };
+    },
+    isHighlighted(bezeichnung) {
+      return store.selectedDataRows.some(({name}) => bezeichnung === name)
     },
     addLegend() {
       const legend = control({ position: "bottomright" });

@@ -6,6 +6,63 @@ import {CNavItem} from "@coreui/vue/dist/esm/components/nav/index.js";
 import {COMPARISON, MAP, OVERVIEW, store} from "@/store.js";
 import SensorComparison from "@/components/pageBody/SensorComparison.vue";
 import TimespanSelector from "@/components/pageBody/TimespanSelector.vue";
+import {computed, ref, watch, watchEffect} from "vue";
+import sonden from "@/res/sonden.json";
+import {fetchDataForDateRangeWithTimeWindow} from "@/services/sondenService.js";
+import pegelOnline from "@/res/pegelOnline.json";
+import {fetchDataForDateRangeWithTimeWindow as pegelFetch} from "@/services/pegelOnlineService.js";
+import {fetchData} from "@/services/precipationService.js";
+
+const DataRowTypes = {
+  LORAWAN_SONDE: 'lorawan-sonde',
+  PEGEL_ONLINE: 'pegelonline'
+}
+
+const lorawanDataRows = ref([])
+const selectedDataRows = ref([])
+const pegelDataRows = ref([])
+const precipationData = ref([])
+
+watchEffect(async () => {
+  lorawanDataRows.value = await Promise.all(
+      sonden.map(async (sonde) => ({
+        name: sonde.bezeichnung,
+        definition: sonde,
+        type: DataRowTypes.LORAWAN_SONDE,
+        dataRow: await fetchDataForDateRangeWithTimeWindow(
+            sonde,
+            store.startDate,
+            store.endDate,
+            store.interval
+        ),
+      }))
+  )
+  pegelDataRows.value = await Promise.all(
+      pegelOnline.map(async (pegel) => ({
+        name: pegel.name,
+        definition: pegel,
+        type: DataRowTypes.PEGEL_ONLINE,
+        dataRow: await pegelFetch(
+            pegel,
+            store.startDate,
+            store.endDate,
+            store.interval
+        ),
+      }))
+  )
+  precipationData.value = await fetchData(store.startDate, store.endDate, store.interval)
+})
+
+const allDataRows = computed(() => [...lorawanDataRows.value, ...pegelDataRows.value])
+
+const selectableDataRows = computed(() => allDataRows.value.filter(({dataRow}) => dataRow.length > 0))
+
+watch(selectableDataRows, () => {
+  const prevSelectedNames = store.selectedDataRows.map(row => row.name)
+  store.selectedDataRows = selectableDataRows.value.filter(({ name }) =>
+      prevSelectedNames.includes(name)
+  )
+})
 </script>
 
 <template>
@@ -23,6 +80,22 @@ import TimespanSelector from "@/components/pageBody/TimespanSelector.vue";
         </CNavItem>
         <CNavItem href="#" @click="store.selectComparison()" class="border-bottom" :class="{ selected: store.selectedTab === COMPARISON }">
           Vergleich
+        </CNavItem>
+        <CNavItem class="border-bottom">
+          <div class="DataRowSelector" v-for="selectableDataRow in selectableDataRows">
+            <br>
+            <label  :key="selectableDataRow.name">
+              <input
+                  type="checkbox"
+                  :name="selectableDataRow.name"
+                  :id="selectableDataRow.name"
+                  :value="selectableDataRow"
+                  v-model="store.selectedDataRows"
+              />
+              {{ selectableDataRow.name }}
+            </label>
+          </div>
+          <br>
         </CNavItem>
         <CNavItem><TimespanSelector/></CNavItem>
       </CSidebarNav>
