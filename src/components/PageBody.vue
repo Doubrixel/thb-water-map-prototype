@@ -82,8 +82,8 @@ watch(selectableDataRows, () => {
           Vergleich
         </CNavItem>
         <CNavItem class="border-bottom">
+          <b>Auswahlmenü</b>
           <div class="DataRowSelector" v-for="selectableDataRow in selectableDataRows">
-            <br>
             <label  :key="selectableDataRow.name">
               <input
                   type="checkbox"

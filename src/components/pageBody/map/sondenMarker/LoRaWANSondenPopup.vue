@@ -3,6 +3,7 @@ import {computed, onMounted, ref, watch} from 'vue'
 import Ganglinie from "@/components/pageBody/map/sondenMarker/sondenPopup/Ganglinie.vue";
 import {fetchDataForDateRangeWithTimeWindow, fetchDataSince, fetchDataSinceWithTimeWindow, Interval, TimeWindow} from "@/services/sondenService.js";
 import {store} from "@/store.js";
+import {CButton} from "@coreui/vue/dist/esm/components/button/index.js";
 
 const props = defineProps({
   sonde: Object
@@ -144,6 +145,15 @@ const lastDataPoint = computed(() => {
       </tbody>
     </table>
   <Ganglinie :datenReihe="selectedDateRangeDataRef"/>
+  <CButton variant="outline" size="sm">
+    <a
+        :href="`https://map.ttn-brb.de/sensors/${sonde.sensorId}#water_level`"
+        target="_blank"
+        rel="noopener"
+    >
+      Quelle
+    </a>
+  </CButton>
 </template>
 
 <style scoped>

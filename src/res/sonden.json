@@ -37,7 +37,8 @@
       "lon": 12.58917
     },
     "echtwert": 30.654,
-    "pnp": 4060
+    "pnp": 4060,
+    "link": "https://map.ttn-brb.de/sensors/33049a20-cc0a-4730-992e-9f19a48636c0#water_level"
   },
   {
     "sensorId": "075b9e51-51e7-4764-817d-889a4624aaaf",

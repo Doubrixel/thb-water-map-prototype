@@ -58,11 +58,18 @@ const renderChart = () => {
         .attr("transform", `translate(${dimensions.width - dimensions.marginRight},0)`)
         .call(d3.axisRight(y2))
         .call(g => g.selectAll("text").attr("fill", "#1f78b4"))
-        .call(g => g.selectAll("line").attr("stroke", "#1f78b4"));
+        .call(g => g.selectAll("line").attr("stroke", "#1f78b4"))
+        .append("text")
+        .attr("fill", "#1f78b4")
+        .attr("x", 0)
+        .attr("y", 40)
+        .attr("dy", "-1em")
+        .attr("text-anchor", "middle")
+        .text("Niederschlag in mm");
 
     let barWidth = 5;
     if (precipitationData.length > 1) {
-      const n = precipitationData.length; // z.B. 12
+      const n = precipitationData.length;
       barWidth = (x(precipitationData[n - 1].timestamp) - x(precipitationData[0].timestamp)) / (n - 1) * 0.9;
     }
 
@@ -77,7 +84,6 @@ const renderChart = () => {
       .style("font-size", "12px")
       .style("visibility", "hidden");
 
-// ... in deinem Balken-Rendering:
 
   svg.append("g")
       .selectAll("rect")

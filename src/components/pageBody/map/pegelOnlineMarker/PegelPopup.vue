@@ -4,6 +4,7 @@ import Ganglinie from "@/components/pageBody/map/sondenMarker/sondenPopup/Gangli
 import {TimeWindow} from "@/services/sondenService.js";
 import {fetchDataForDateRangeWithTimeWindow, fetchDataSince, fetchDataSinceWithTimeWindow} from "@/services/pegelOnlineService.js";
 import {store} from "@/store.js";
+import {CButton} from "@coreui/vue/dist/cjs/components/button/index.js";
 
 const props = defineProps({
   pegel: Object
@@ -131,6 +132,15 @@ const lastDataPoint = computed(() => {
       </tbody>
     </table>
   <Ganglinie :datenReihe="selectedDateRangeDataRef"/>
+  <CButton variant="outline" size="sm">
+    <a
+        :href="pegel.link"
+        target="_blank"
+        rel="noopener"
+    >
+      Quelle
+    </a>
+  </CButton>
 </template>
 
 <style scoped>

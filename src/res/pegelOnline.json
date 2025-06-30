@@ -6,7 +6,8 @@
     "geoDaten": {
       "lat": 52.420874686459335,
       "lon": 12.580814114983538
-    }
+    },
+    "link": "https://pegelonline.wsv.de/gast/stammdaten?pegelnr=580440"
   },
   {
     "name": "KETZIN",
@@ -15,7 +16,8 @@
     "geoDaten": {
       "lat": 52.46315528857149,
       "lon": 12.856782146218224
-    }
+    },
+    "link": "https://pegelonline.wsv.de/gast/stammdaten?pegelnr=580430"
   },
   {
     "name": "ALBERTSHEIM",
@@ -24,7 +26,8 @@
     "geoDaten": {
       "lat": 52.65594738502414,
       "lon": 12.333708647747075
-    }
+    },
+    "link": "https://pegelonline.wsv.de/gast/stammdaten?pegelnr=580520"
   },
   {
     "name": "BRANDENBURG UP",
@@ -33,6 +36,7 @@
     "geoDaten": {
       "lat": 52.42366487756139,
       "lon": 12.568840897802437
-    }
+    },
+    "link": "https://pegelonline.wsv.de/gast/stammdaten?pegelnr=580450"
   }
 ]

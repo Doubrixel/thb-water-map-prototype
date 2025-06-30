@@ -10,9 +10,12 @@
       <l-geo-json
           v-if="polderGebiete"
           :geojson="polderGebiete"
-          :options-style="styleGeoJson"
-          :options="{ interactive: false }"
-      ></l-geo-json>
+          :options="{
+            interactive: true,
+            onEachFeature: onEachFeature,
+            style: styleGeoJson
+          }"
+      />
       <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde" :highlight="isHighlighted(sonde.bezeichnung)"></sondenMarker>
       <PegelOnlineMarker v-for="(pegel) in pegelOnline" :key="pegel.uuid" :pegel="pegel" :highlight="isHighlighted(pegel.name)"></PegelOnlineMarker>
     </l-map>
@@ -93,6 +96,12 @@ export default {
     },
     onMapReady() {
       this.addLegend();
+    },
+    onEachFeature(feature, layer) {
+      const props = feature.properties || {};
+      const name = props.GEBIET || props.Bereich || "Kein Name verfügbar";
+
+      layer.bindPopup(`<strong>${name}</strong>`);
     }
   }
 };
