@@ -63,6 +63,15 @@ watch(selectableDataRows, () => {
       prevSelectedNames.includes(name)
   )
 })
+
+watch(() => store.selectedTab, (newTab) => {
+  if (newTab !== MAP) {
+    store.selectedDataRows = store.selectedDataRows.filter(row =>
+        selectableDataRows.value.includes(row)
+    );
+  }
+});
+
 </script>
 
 <template>
@@ -83,7 +92,7 @@ watch(selectableDataRows, () => {
         </CNavItem>
         <CNavItem class="border-bottom">
           <b>Auswahlmenü</b>
-          <div class="DataRowSelector" v-for="selectableDataRow in selectableDataRows">
+          <div class="DataRowSelector" v-for="selectableDataRow in allDataRows">
             <label  :key="selectableDataRow.name">
               <input
                   type="checkbox"
@@ -91,6 +100,7 @@ watch(selectableDataRows, () => {
                   :id="selectableDataRow.name"
                   :value="selectableDataRow"
                   v-model="store.selectedDataRows"
+                  :disabled="!selectableDataRows.includes(selectableDataRow) && store.selectedTab !== MAP"
               />
               {{ selectableDataRow.name }}
             </label>

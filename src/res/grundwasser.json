@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Brandenburg-Neuendorf",
+    "lat": 52.443749,
+    "lng": 12.558602,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13404&QURPRM_NHN_NW=27%2c66&QURPRM_NHN_MW=28%2c14&QURPRM_NHN_HW=29%2c26"
+  },
+  {
+    "name": "Brandenburg, Wilhelmsdorfer Landstraße UF",
+    "lat": 52.395251,
+    "lng": 12.54184,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=14049&QURPRM_NHN_NW=27%2c72&QURPRM_NHN_MW=28%2c33&QURPRM_NHN_HW=29%2c27"
+  },
+  {
+    "name": "Brandenburg-Wilhelmsdorf",
+    "lat": 52.37189,
+    "lng": 12.501306,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=14988&QURPRM_NHN_NW=29%2c04&QURPRM_NHN_MW=29%2c81&QURPRM_NHN_HW=30%2c77"
+  },
+  {
+    "name": "Schmerzke, Schmerzker Heide, MP",
+    "lat": 52.375765,
+    "lng": 12.576753,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13531&QURPRM_NHN_NW=28%2c31&QURPRM_NHN_MW=28%2c79&QURPRM_NHN_HW=29%2c3"
+  },
+  {
+    "name": "Brandenburg, Plauerhof",
+    "lat": 52.414734,
+    "lng": 12.442646,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=12414&QURPRM_NHN_NW=27%2c17&QURPRM_NHN_MW=28%2c08&QURPRM_NHN_HW=29%2c08"
+  },
+  {
+    "name": "Brandenburg, Str. nach Mötzow",
+    "lat": 52.441121,
+    "lng": 12.583879,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13508&QURPRM_NHN_NW=28%2c1&QURPRM_NHN_MW=28%2c8&QURPRM_NHN_HW=29%2c85"
+  },
+  {
+    "name": "Klein Kreutz",
+    "lat": 52.454041,
+    "lng": 12.618821,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13512&QURPRM_NHN_NW=28%2c79&QURPRM_NHN_MW=29%2c43&QURPRM_NHN_HW=29%2c99"
+  },
+  {
+    "name": "Brandenburg, Fritze-Bollmann-Weg OP",
+    "lat": 52.443749,
+    "lng": 12.558602,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13555&QURPRM_NHN_NW=27%2c81&QURPRM_NHN_MW=28%2c41&QURPRM_NHN_HW=29%2c5"
+  },
+  {
+    "name": "Brandenburg, am Gördensee",
+    "lat": 52.436386,
+    "lng": 12.483619,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=12426&QURPRM_NHN_NW=27%2c49&QURPRM_NHN_MW=28%2c39&QURPRM_NHN_HW=29%2c33"
+  },
+  {
+    "name": "Klein Kreutz, Alte Weinberge",
+    "lat": 52.443045,
+    "lng": 12.639876,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13656&QURPRM_NHN_NW=28%2c56&QURPRM_NHN_MW=29%2c16&QURPRM_NHN_HW=29%2c9"
+  },
+  {
+    "name": "Brandenburg-Görisgräben, Fl",
+    "lat": 52.337151,
+    "lng": 12.486443,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=11275&QURPRM_NHN_NW=31%2c42&QURPRM_NHN_MW=31%2c9&QURPRM_NHN_HW=32%2c65"
+  },
+  {
+    "name": "Kirchmöser, Zolchberge, OP",
+    "lat": 52.36398,
+    "lng": 12.422812,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=11257&QURPRM_NHN_NW=28%2c78&QURPRM_NHN_MW=29%2c19&QURPRM_NHN_HW=29%2c83"
+  },
+  {
+    "name": "Plaue, Ortsteil Charlottenhof",
+    "lat": 52.417696,
+    "lng": 12.403619,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13647&QURPRM_NHN_NW=27%2c93&QURPRM_NHN_MW=28%2c45&QURPRM_NHN_HW=29%2c46"
+  }
+]

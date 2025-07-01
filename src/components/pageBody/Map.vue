@@ -12,12 +12,13 @@
           :geojson="polderGebiete"
           :options="{
             interactive: true,
-            onEachFeature: onEachFeature,
-            style: styleGeoJson
+            onEachFeature: onEachFeature
           }"
+          :options-style="styleGeoJson"
       />
       <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde" :highlight="isHighlighted(sonde.bezeichnung)"></sondenMarker>
       <PegelOnlineMarker v-for="(pegel) in pegelOnline" :key="pegel.uuid" :pegel="pegel" :highlight="isHighlighted(pegel.name)"></PegelOnlineMarker>
+      <GrundwasserMarker v-for="(grundwasser) in grundwassers" :key="grundwasser.name" :grundwasser="grundwasser"></GrundwasserMarker>
     </l-map>
   </div>
 </template>
@@ -30,12 +31,15 @@ import SondenMarker from "@/components/pageBody/map/SondenMarker.vue";
 import sonden from "@/res/sonden.json"
 import polderGebiete from "@/res/polder_4326.json"
 import pegelOnline from "@/res/pegelOnline.json"
+import grundwassers from "@/res/grundwasser.json"
 import PegelOnlineMarker from "@/components/pageBody/map/PegelOnlineMarker.vue";
 import {store} from "@/store.js";
+import GrundwasserMarker from "@/components/pageBody/map/GrundwasserMarker.vue";
 
 
 export default {
   components: {
+    GrundwasserMarker,
     SondenMarker,
     PegelOnlineMarker,
     LMap,
@@ -51,6 +55,7 @@ export default {
       sonden,
       polderGebiete,
       pegelOnline,
+      grundwassers,
       mapOptions: {
         zoomAnimation: true,
         zoomAnimationThreshold: 4, // optional: sets when animation switches to instant
@@ -80,16 +85,41 @@ export default {
         div.style.boxShadow = "0 0 15px rgba(0,0,0,0.2)"; // leichter Schatten
 
         div.innerHTML = `
-    <i style="
-      border: 1px solid blue;    /* blauer Rand */
-      background-color: rgba(0, 0, 255, 0.2); /* transparent innen */
-      width: 18px;
-      height: 18px;
-      display: inline-block;
-      margin-right: 8px;
-      vertical-align: middle;
-    "></i> Polder
-  `;
+  <table style="font-size: 13px; border-collapse: collapse;">
+    <tr>
+      <td>
+        <i style="
+          border: 1px solid blue;
+          background-color: rgba(0, 0, 255, 0.2);
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          margin-right: 4px;
+        "></i>
+      </td>
+      <td>Polder</td>
+    </tr>
+    <tr>
+      <td>
+        <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png" alt="Sonde">
+      </td>
+      <td>Sonde</td>
+    </tr>
+    <tr>
+      <td>
+        <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png" alt="GWM">
+      </td>
+      <td>GWM</td>
+    </tr>
+    <tr>
+      <td>
+        <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png" alt="WSA">
+      </td>
+      <td>WSA</td>
+    </tr>
+  </table>
+`;
+
         return div;
       };
       legend.addTo(this.$refs.map.leafletObject);
@@ -101,6 +131,7 @@ export default {
       const props = feature.properties || {};
       const name = props.GEBIET || props.Bereich || "Kein Name verfügbar";
 
+      layer.bindTooltip(`<strong>${name}</strong>`);
       layer.bindPopup(`<strong>${name}</strong>`);
     }
   }

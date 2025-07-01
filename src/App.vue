@@ -13,7 +13,7 @@ import PageBody from "@/components/PageBody.vue";
       <div>
         <a href="https://github.com/Doubrixel/thb-water-map-prototype">Quellcode</a>
       </div>
-      <diV>Hinweis: Sonden werden im Auswahlmenü nur angezeigt, wenn es im ausgewählten Zeitraum Datenpunkte gibt. </diV>
+      <diV>Hinweis: Sonden sind nur auswählbar, wenn es Datenpunkte im ausgewählten Zeitraum gibt. </diV>
       <div>
         Favicon powered by
         <a href="https://www.freepik.com/icon/water-drop_12041742">Freepik</a>
