@@ -1,5 +1,5 @@
 <script setup>
-import {CSidebar, CSidebarBrand, CSidebarFooter, CSidebarHeader, CSidebarNav, CSidebarToggler} from "@coreui/vue/dist/esm/components/sidebar/index.js";
+import {CSidebar, CSidebarBrand, CSidebarHeader, CSidebarNav} from "@coreui/vue/dist/esm/components/sidebar/index.js";
 import Map from "@/components/pageBody/Map.vue";
 import SensorOverview from "@/components/pageBody/SensorOverview.vue";
 import {CNavItem} from "@coreui/vue/dist/esm/components/nav/index.js";
@@ -12,6 +12,7 @@ import {fetchDataForDateRangeWithTimeWindow} from "@/services/sondenService.js";
 import pegelOnline from "@/res/pegelOnline.json";
 import {fetchDataForDateRangeWithTimeWindow as pegelFetch} from "@/services/pegelOnlineService.js";
 import {fetchData} from "@/services/precipationService.js";
+import {CTooltip} from "@coreui/vue/dist/esm/components/tooltip/index.js";
 
 const DataRowTypes = {
   LORAWAN_SONDE: 'lorawan-sonde',
@@ -19,7 +20,6 @@ const DataRowTypes = {
 }
 
 const lorawanDataRows = ref([])
-const selectedDataRows = ref([])
 const pegelDataRows = ref([])
 const precipationData = ref([])
 
@@ -72,6 +72,8 @@ watch(() => store.selectedTab, (newTab) => {
   }
 });
 
+const isDisabled = (row) => !selectableDataRows.value.includes(row) && store.selectedTab !== MAP
+
 </script>
 
 <template>
@@ -93,17 +95,24 @@ watch(() => store.selectedTab, (newTab) => {
         <CNavItem class="border-bottom">
           <b>Auswahlmenü</b>
           <div class="DataRowSelector" v-for="selectableDataRow in allDataRows">
-            <label  :key="selectableDataRow.name">
-              <input
-                  type="checkbox"
-                  :name="selectableDataRow.name"
-                  :id="selectableDataRow.name"
-                  :value="selectableDataRow"
-                  v-model="store.selectedDataRows"
-                  :disabled="!selectableDataRows.includes(selectableDataRow) && store.selectedTab !== MAP"
-              />
-              {{ selectableDataRow.name }}
-            </label>
+            <CTooltip
+                :visible="isDisabled(selectableDataRow)"
+                :content="isDisabled(selectableDataRow) ? 'Keine Datenpunkte im ausgewählten Zeitraum' : ''"
+            >
+              <template #toggler="{ id, on }">
+                <label  :key="selectableDataRow.name" :aria-describedby="id" v-on="on">
+                  <input
+                      type="checkbox"
+                      :name="selectableDataRow.name"
+                      :id="selectableDataRow.name"
+                      :value="selectableDataRow"
+                      v-model="store.selectedDataRows"
+                      :disabled="isDisabled(selectableDataRow)"
+                  />
+                  {{ selectableDataRow.name }}
+                </label>
+              </template>
+            </CTooltip>
           </div>
           <br>
         </CNavItem>

@@ -4,6 +4,8 @@ import Ganglinie from "@/components/pageBody/map/sondenMarker/sondenPopup/Gangli
 import {fetchDataForDateRangeWithTimeWindow, fetchDataSince, fetchDataSinceWithTimeWindow, Interval, TimeWindow} from "@/services/sondenService.js";
 import {store} from "@/store.js";
 import {CButton} from "@coreui/vue/dist/esm/components/button/index.js";
+import {CTooltip} from '@coreui/vue/src/components/tooltip/CTooltip'
+
 
 const props = defineProps({
   sonde: Object
@@ -79,7 +81,16 @@ const lastDataPoint = computed(() => {
 </script>
 
 <template>
-  <h6>{{sonde.bezeichnung}} {{daysSinceLastValidDataPoint > 1 ? "🔴" : "🟢"}}</h6>
+  <div class="TitleHolder">
+    <h6>{{sonde.bezeichnung}} </h6>
+    <CTooltip :content="daysSinceLastValidDataPoint > 1 ? 'Kein Datenpunkt in den letzten 24h' : 'Sonde aktiv'">
+      <template #toggler="{ id, on }">
+        <span v-on="on" :aria-describedby="id">
+          {{daysSinceLastValidDataPoint > 1 ? "🔴" : "🟢"}}
+        </span>
+      </template>
+    </CTooltip>
+  </div>
     <table>
       <thead>
       <tr>
@@ -157,6 +168,12 @@ const lastDataPoint = computed(() => {
 </template>
 
 <style scoped>
+.TitleHolder {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
 img {
   width: 100%;
 }

@@ -4,6 +4,10 @@
 
 Dieses Projekt dient zur Visualisierung von Pegelständen. Diese Pegelstände werden von LoRaWAN-Sensoren in Brandenburg (a.d.H.) erfasst.
 
+## Unterstützte Browser
+- Chrome
+- Firefox
+
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
@@ -25,6 +29,7 @@ npm run dev
 ```sh
 npm run build
 ```
+Um die Website unter einem anderen Pfad zu betreiben, muss das 'base' Attribut unter vite.config.js angepasst werden. 
 
 ### Publish on gh-pages branch
 

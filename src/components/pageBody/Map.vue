@@ -103,19 +103,19 @@ export default {
       <td>
         <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png" alt="Sonde">
       </td>
-      <td>Sonde</td>
+      <td>LoRaWAN-Sonde</td>
     </tr>
     <tr>
       <td>
         <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png" alt="GWM">
       </td>
-      <td>GWM</td>
+      <td>Grundwassermessstelle</td>
     </tr>
     <tr>
       <td>
         <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png" alt="WSA">
       </td>
-      <td>WSA</td>
+      <td>Wasserstraßen- und Schifffahrtsamt Messstelle</td>
     </tr>
   </table>
 `;
