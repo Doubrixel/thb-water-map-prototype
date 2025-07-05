@@ -38,7 +38,7 @@
     },
     "echtwert": 30.654,
     "pnp": 4060,
-    "link": "https://map.ttn-brb.de/sensors/33049a20-cc0a-4730-992e-9f19a48636c0#water_level"
+    "mindestwasserstand": 28.56
   },
   {
     "sensorId": "075b9e51-51e7-4764-817d-889a4624aaaf",
@@ -48,6 +48,7 @@
       "lon": 12.64685
     },
     "echtwert": 28.96,
-    "pnp": 1250
+    "pnp": 1250,
+    "mindestwasserstand": 28.35
   }
 ]

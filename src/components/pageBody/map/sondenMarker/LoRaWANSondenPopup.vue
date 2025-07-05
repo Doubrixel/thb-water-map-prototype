@@ -155,7 +155,7 @@ const lastDataPoint = computed(() => {
         </tr>
       </tbody>
     </table>
-  <Ganglinie :datenReihe="selectedDateRangeDataRef"/>
+  <Ganglinie :datenReihe="selectedDateRangeDataRef" :mindestwasserstand="sonde.mindestwasserstand"/>
   <CButton variant="outline" size="sm">
     <a
         :href="`https://map.ttn-brb.de/sensors/${sonde.sensorId}#water_level`"

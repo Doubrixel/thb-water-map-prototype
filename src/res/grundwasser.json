@@ -18,12 +18,6 @@
     "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=14988&QURPRM_NHN_NW=29%2c04&QURPRM_NHN_MW=29%2c81&QURPRM_NHN_HW=30%2c77"
   },
   {
-    "name": "Schmerzke, Schmerzker Heide, MP",
-    "lat": 52.375765,
-    "lng": 12.576753,
-    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13531&QURPRM_NHN_NW=28%2c31&QURPRM_NHN_MW=28%2c79&QURPRM_NHN_HW=29%2c3"
-  },
-  {
     "name": "Brandenburg, Plauerhof",
     "lat": 52.414734,
     "lng": 12.442646,
@@ -76,5 +70,35 @@
     "lat": 52.417696,
     "lng": 12.403619,
     "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13647&QURPRM_NHN_NW=27%2c93&QURPRM_NHN_MW=28%2c45&QURPRM_NHN_HW=29%2c46"
+  },
+  {
+    "name": "Schmerzker Heide, OP",
+    "lat": 52.375765,
+    "lng": 12.576753,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13532&QURPRM_NHN_NW=28%2c49&QURPRM_NHN_MW=29%2c05&QURPRM_NHN_HW=29%2c6"
+  },
+  {
+    "name": "Prützke Ost OP",
+    "lat": 52.34458,
+    "lng": 12.636171,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13402&QURPRM_NHN_NW=30%2c62&QURPRM_NHN_MW=31%2c15&QURPRM_NHN_HW=31%2c89"
+  },
+  {
+    "name": "Wenzlow, Sandfang",
+    "lat": 52.283771,
+    "lng": 12.442074,
+    "link": null
+  },
+  {
+    "name": "Viesener Mühle",
+    "lat": 52.312354,
+    "lng": 12.396803,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=11273&QURPRM_NHN_NW=35%2c66&QURPRM_NHN_MW=36%2c05&QURPRM_NHN_HW=36%2c61"
+  },
+  {
+    "name": "archau, ca. 2 km südöstl., OP",
+    "lat": 52.348942,
+    "lng": 12.38314,
+    "link": "https://apw.brandenburg.de/project/cardo3Apps/IDU_CMAPP_LFUBRB_Diagramme/Diagramm.aspx?diagramm_config=GW_WASSERSTAND&id_messstelle=13994&QURPRM_NHN_NW=46%2c14&QURPRM_NHN_MW=47%2c62&QURPRM_NHN_HW=49%2c09"
   }
 ]

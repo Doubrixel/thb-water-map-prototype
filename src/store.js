@@ -19,5 +19,6 @@ export const store = reactive({
     startDate: new Date(new Date().setMonth(new Date().getMonth() - 1)),
     endDate: new Date(),
     interval: TimeWindow.DAY,
-    selectedDataRows: []
+    selectedDataRows: [],
+    precipationData: [],
 })

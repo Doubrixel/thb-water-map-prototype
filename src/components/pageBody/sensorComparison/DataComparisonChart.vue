@@ -45,6 +45,16 @@ const renderChart = () => {
   })
 
   if (props.precipationData.length > 0) {
+
+    svg.append("defs")
+        .append("clipPath")
+        .attr("id", "clip-precip-bars")
+        .append("rect")
+        .attr("x", dimensions.marginLeft)
+        .attr("y", dimensions.marginTop)
+        .attr("width", dimensions.width - dimensions.marginLeft - dimensions.marginRight)
+        .attr("height", dimensions.height - dimensions.marginTop - dimensions.marginBottom);
+
     const precipitationData = props.precipationData
         .filter(d => d.value != null)
         .map(d => ({ ...d, timestamp: new Date(d.timestamp) }));
@@ -86,18 +96,24 @@ const renderChart = () => {
 
 
   svg.append("g")
+      .attr("clip-path", "url(#clip-precip-bars)")
       .selectAll("rect")
       .data(precipitationData.slice(1))
       .join("rect")
-      .attr("x", (d) => x(d.timestamp))
+      .attr("x", (d) => x(d.timestamp)-barWidth)
       .attr("y", d => Math.min(y2(d.value), y2(0)))
       .attr("width", barWidth)
       .attr("height", d => Math.abs(y2(0) - y2(d.value)))
       .attr("fill", "#1f78b4")
       .attr("opacity", 0.6)
-      .on("mouseenter", (event, d) => {
+      .on("mouseenter", (event, d, i) => {
+        const index = precipitationData.findIndex(p => p.timestamp.getTime() === d.timestamp.getTime());
+        const prev = precipitationData[index - 1];
+        const format = d3.timeFormat("%Y-%m-%d");
+        const from = prev ? format(prev.timestamp) : "Start";
+        const to = format(d.timestamp);
         tooltip.style("visibility", "visible")
-            .text(`${d3.timeFormat("%Y-%m-%d")(d.timestamp)}: ${d.value.toFixed(2)} mm`);
+            .text(`${from} → ${to}: ${d.value.toFixed(2)} mm`);
       })
       .on("mousemove", (event) => {
         tooltip

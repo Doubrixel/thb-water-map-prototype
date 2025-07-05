@@ -7,6 +7,7 @@ Dieses Projekt dient zur Visualisierung von Pegelständen. Diese Pegelstände we
 ## Unterstützte Browser
 - Chrome
 - Firefox
+- Edge
 
 ## Customize configuration
 
@@ -49,7 +50,9 @@ npm run deploy
 
 ## APIs
 https://pegelonline.wsv.de (Pegelstände Havel)
+
 https://archive-api.open-meteo.com (Niederschlagsdaten)
+
 https://map.ttn-brb.de (LoRaWAN Sensordaten)
 
 

@@ -8,6 +8,7 @@ const precipationData = ref([])
 
 watchEffect(async () => {
   precipationData.value = await fetchData(store.startDate, store.endDate, store.interval)
+  store.precipationData = precipationData.value
 })
 </script>
 

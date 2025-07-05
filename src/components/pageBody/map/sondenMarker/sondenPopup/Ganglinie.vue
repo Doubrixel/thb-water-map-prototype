@@ -2,7 +2,8 @@
 import {ref, watch} from "vue";
 import {appendMarkerLinesWithLegend, createBaseChart, insertDataRow} from "@/util/chartFunctions.js";
 const props = defineProps({
-  datenReihe: Object  //array ref [{pnpInCm, echtwertInM, timestamp}]
+  datenReihe: Object, //array ref [{pnpInCm, echtwertInM, timestamp}]
+  mindestwasserstand: Number,
 })
 
 const svgContainer = ref(null)
@@ -23,6 +24,26 @@ watch(() => props.datenReihe, (datenReihe) => {
   const {svg, x, y} = createBaseChart(datenReihe, 25, dimensions, {useY2Axis: true, scaleAxisLabels: true})
   insertDataRow(svg, x, y, filteredDatenReihe, {showDataPoints: true})
   appendMarkerLinesWithLegend(svg, y, filteredDatenReihe, dimensions)
+
+  if (typeof props.mindestwasserstand === 'number') {
+    const mw = props.mindestwasserstand
+    svg.append("line")
+        .attr("x1", dimensions.marginLeft)
+        .attr("x2", dimensions.width - dimensions.marginRight)
+        .attr("y1", y(mw))
+        .attr("y2", y(mw))
+        .attr("stroke", "red")
+        .attr("stroke-width", 2)
+
+    svg.append("text")
+        .attr("x", dimensions.marginLeft + 5)
+        .attr("y", dimensions.height - dimensions.marginBottom - 20)
+        .attr("dy", "0.35em")
+        .style("fill", "red")
+        .style("font-size", "24px")
+        .text(`___ = Mindestwasserstand: ${mw.toFixed(2)} m`)
+  }
+
   svgContainer.value.appendChild(svg.node())
 })
 </script>
