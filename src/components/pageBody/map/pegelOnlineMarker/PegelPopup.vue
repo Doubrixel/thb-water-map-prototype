@@ -140,7 +140,7 @@ const lastDataPoint = computed(() => {
     >
       Quelle
     </a>
-  </CButton>
+  </CButton> (Zeitraum max. letzte 30 Tage)
 </template>
 
 <style scoped>

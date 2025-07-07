@@ -13,8 +13,11 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <div class="SensorComparison">
-    <DataComparisonChart :dataRows="store.selectedDataRows" :precipationData="precipationData" />
+  <div class="ComparisonHolder">
+    <div class="SensorComparison">
+      <DataComparisonChart :dataRows="store.selectedDataRows" :precipationData="precipationData" />
+    </div>
+    Für Messstellen des Wasserstraßen- und Schifffahrtsamts stehen nur Daten für die letzten 30 Tage zur Verfügung.
   </div>
 </template>
 
@@ -23,10 +26,13 @@ watchEffect(async () => {
   width: 100%;
   display: flex;
   flex-direction: row;
+  height: 96%;
 }
 
-.DataRowSelector {
+.ComparisonHolder {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin-left: 10px;
 }
 </style>

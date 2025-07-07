@@ -19,6 +19,7 @@
       <SondenMarker v-for="(sonde) in sonden" :key="sonde.sensorId" :sonde="sonde" :highlight="isHighlighted(sonde.bezeichnung)"></sondenMarker>
       <PegelOnlineMarker v-for="(pegel) in pegelOnline" :key="pegel.uuid" :pegel="pegel" :highlight="isHighlighted(pegel.name)"></PegelOnlineMarker>
       <GrundwasserMarker v-for="(grundwasser) in grundwassers" :key="grundwasser.name" :grundwasser="grundwasser"></GrundwasserMarker>
+      <DurchflussMarker v-for="(durchfluss) in durchflusss" :key="durchfluss.name" :durchfluss="durchfluss"></DurchflussMarker>
     </l-map>
   </div>
 </template>
@@ -32,13 +33,16 @@ import sonden from "@/res/sonden.json"
 import polderGebiete from "@/res/polder_4326.json"
 import pegelOnline from "@/res/pegelOnline.json"
 import grundwassers from "@/res/grundwasser.json"
+import durchflusss from "@/res/durchfluss.json"
 import PegelOnlineMarker from "@/components/pageBody/map/PegelOnlineMarker.vue";
 import {store} from "@/store.js";
 import GrundwasserMarker from "@/components/pageBody/map/GrundwasserMarker.vue";
+import DurchflussMarker from "@/components/pageBody/map/DurchflussMarker.vue";
 
 
 export default {
   components: {
+    DurchflussMarker,
     GrundwasserMarker,
     SondenMarker,
     PegelOnlineMarker,
@@ -56,6 +60,7 @@ export default {
       polderGebiete,
       pegelOnline,
       grundwassers,
+      durchflusss,
       mapOptions: {
         zoomAnimation: true,
         zoomAnimationThreshold: 4, // optional: sets when animation switches to instant
@@ -116,6 +121,12 @@ export default {
         <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png" alt="WSA">
       </td>
       <td>Wasserstraßen- und Schifffahrtsamt Messstelle</td>
+    </tr>
+    <tr>
+      <td>
+        <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png" alt="LfU">
+      </td>
+      <td>Landesamt für Umwelt Messstelle</td>
     </tr>
   </table>
 `;

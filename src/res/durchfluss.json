@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Neue Mühle, Wehr OP",
+    "lat": 52.348087,
+    "lng": 12.484161,
+    "link": "https://pegelportal.brandenburg.de/messstelle.php?fgid=3&pkz=5874601&thema=ws_graph"
+  },
+  {
+    "name": "Mahlenzien, Wehr UP",
+    "lat": 52.320718,
+    "lng": 12.439634,
+    "link": "https://pegelportal.brandenburg.de/messstelle.php?fgid=3&pkz=5874900&thema=ws_graph"
+  },
+  {
+    "name": "Göttin",
+    "lat": 52.372335,
+    "lng": 12.546341,
+    "link": "https://pegelportal.brandenburg.de/messstelle.php?fgid=3&pkz=5873600&thema=ws_graph"
+  },
+  {
+    "name": "Görisgräben",
+    "lat": 52.339641,
+    "lng": 12.48028,
+    "link": "https://pegelportal.brandenburg.de/messstelle.php?fgid=3&pkz=5874600&thema=ws_graph"
+  },
+  {
+    "name": "Brandenburg-Wilhelmsdorf",
+    "lat": 52.375544,
+    "lng": 12.513162,
+    "link": "https://pegelportal.brandenburg.de/messstelle.php?fgid=3&pkz=5874100&thema=ws_graph"
+  }
+]
