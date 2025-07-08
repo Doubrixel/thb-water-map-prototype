@@ -57,7 +57,7 @@ https://map.ttn-brb.de (LoRaWAN Sensordaten)
 
 
 ## Konfiguration
-Aktuell unter res abgelegt
+Aktuell unter /res abgelegt
 sonden.json: Hält Informationen über die LoRaWAN Sonden:
 - sondenId: uuid der Sonde gemäß https://map.ttn-brb.de
 - echtwert: Höhe (in m. ü. NHN), auf der die Sonde angebracht ist. Zieht man davon den Messwert der Sonde ab, kennt man den Wasserstand.
