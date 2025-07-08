@@ -120,13 +120,13 @@ export default {
       <td>
         <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png" alt="WSA">
       </td>
-      <td>Wasserstraßen- und Schifffahrtsamt Messstelle</td>
+      <td>Havelwasserstände</td>
     </tr>
     <tr>
       <td>
         <img style="height: 18px; width: 12px;" src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png" alt="LfU">
       </td>
-      <td>Landesamt für Umwelt Messstelle</td>
+      <td>Oberflächengewässer Wasserstände</td>
     </tr>
   </table>
 `;
